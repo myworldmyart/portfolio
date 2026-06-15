@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Manish Wadhwani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Indie+Flower&family=Patrick+Hand&family=Special+Elite&family=Rock+Salt&family=Homemade+Apple&family=Reenie+Beanie&family=Amatic+SC:wght@400;700&family=Bowlby+One+SC&family=Shrikhand&display=swap"
+    rel="stylesheet">
+  
+  <style>
+    :root {
+      --paper: #fdfaf2;
+      --line: #b8d4e3;
+      --margin: #e85a5a;
+      --ink: #1a2438;
+      --ink-soft: #2c3e60;
+      --blue-pen: #1e4d8b;
+      --red-pen: #c0392b;
+      --highlight: #fff176;
+      --highlight-pink: #f8bbd0;
+      --tape: rgba(255, 235, 130, 0.55);
+      --tape-edge: rgba(220, 200, 100, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #ffffff;
+      background-image:
+        repeating-linear-gradient(to right, transparent 0, transparent 23px, rgba(80, 110, 160, 0.18) 23px, rgba(80, 110, 160, 0.18) 24px),
+        repeating-linear-gradient(to bottom, transparent 0, transparent 23px, rgba(80, 110, 160, 0.18) 23px, rgba(80, 110, 160, 0.18) 24px);
+      min-height: 100vh;
+      font-family: 'Kalam', cursive;
+      color: var(--ink);
+      position: relative;
+    }
+
+    body::before {
+      content: none;
+    }
+
+    body::after {
+      content: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 60px 60px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* BACK BUTTON */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: var(--blue-pen);
+      text-decoration: none;
+      margin-bottom: 30px;
+      padding: 6px 14px;
+      background: #fff;
+      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.10);
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: rotate(0deg) translateX(-4px);
+      color: var(--red-pen);
+    }
+
+    .back-btn .arrow {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 22px;
+    }
+
+    /* HERO */
+    .project-hero {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 20px;
+      align-items: baseline;
+      margin-bottom: 8px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 18px;
+      color: var(--red-pen);
+      transform: rotate(-1deg);
+    }
+
+    .project-meta .dot {
+      color: var(--ink);
+      opacity: 0.4;
+    }
+
+    .project-title {
+      font-family: 'Shrikhand', cursive;
+      font-size: 86px;
+      line-height: 0.95;
+      color: var(--ink);
+      transform: rotate(-2deg);
+      margin-bottom: 10px;
+      display: inline-block;
+      max-width: 100%;
+      word-break: break-word;
+    }
+
+    .project-title .accent {
+      color: var(--red-pen);
+    }
+
+    .project-subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      color: var(--blue-pen);
+      transform: rotate(-1deg);
+      max-width: 700px;
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      background: linear-gradient(135deg, #1a2438, #4a5d80);
+      position: relative;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .hero-visual img,
+    .hero-visual video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-visual.placeholder-mode {
+      aspect-ratio: 16 / 9;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 8%;
+      transform: rotate(-3deg);
+      width: 120px;
+      height: 24px;
+      background: var(--tape);
+      border: 1px dashed var(--tape-edge);
+    }
+
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 8%;
+      transform: rotate(4deg);
+      width: 120px;
+      height: 24px;
+      background: var(--tape);
+      border: 1px dashed var(--tape-edge);
+    }
+
+    .hero-visual .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shrikhand', sans-serif;
+      font-size: 200px;
+      color: rgba(255, 255, 255, 0.15);
+      text-align: center;
+    }
+
+    .hero-visual .placeholder-note {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-family: 'Indie Flower', cursive;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* CONTENT SECTIONS */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .meta-side {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .meta-block h4 {
+      font-family: 'Reenie Beanie', cursive;
+      font-size: 28px;
+      color: var(--red-pen);
+      margin-bottom: 4px;
+      transform: rotate(-2deg);
+    }
+
+    .meta-block .value {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 20px;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .meta-block ul {
+      list-style: none;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 19px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .meta-block ul li::before {
+      content: '✓ ';
+      color: var(--blue-pen);
+      margin-right: 4px;
+    }
+
+    .body-content {}
+
+    .body-content h3 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 36px;
+      color: var(--ink);
+      margin: 30px 0 16px;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    .body-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .body-content h3 .accent {
+      color: var(--red-pen);
+    }
+
+    .body-content p {
+      font-family: 'Kalam', cursive;
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 18px;
+      max-width: 700px;
+    }
+
+    .body-content p .hl {
+      background: linear-gradient(180deg, transparent 50%, var(--highlight) 50%, var(--highlight) 90%, transparent 90%);
+      padding: 0 4px;
+    }
+
+    .body-content p .hl-pink {
+      background: linear-gradient(180deg, transparent 50%, var(--highlight-pink) 50%, var(--highlight-pink) 90%, transparent 90%);
+      padding: 0 4px;
+    }
+
+    .body-content blockquote {
+      font-family: 'Homemade Apple', cursive;
+      font-size: 22px;
+      color: var(--blue-pen);
+      border-left: 4px solid var(--red-pen);
+      padding-left: 20px;
+      margin: 30px 0;
+      transform: rotate(-0.5deg);
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* GALLERY */
+    .gallery-section {
+      margin: 60px 0;
+    }
+
+    .gallery-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 42px;
+      color: var(--ink);
+      margin-bottom: 30px;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    .gallery-title .accent {
+      color: var(--red-pen);
+    }
+
+    .gallery-grid {
+      column-count: 3;
+      column-gap: 30px;
+    }
+
+    @media (max-width: 920px) {
+      .gallery-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid {
+        column-count: 1;
+      }
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 30px;
+      display: inline-block;
+      width: 100%;
+      background: #fefefe;
+      padding: 12px 12px 36px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 80px;
+      height: 18px;
+      background: var(--tape);
+      border: 1px dashed var(--tape-edge);
+    }
+
+    .gallery-item.r1 {
+      transform: rotate(-2deg);
+    }
+
+    .gallery-item.r2 {
+      transform: rotate(1deg);
+    }
+
+    .gallery-item.r3 {
+      transform: rotate(-1deg);
+    }
+
+    .gallery-item.r4 {
+      transform: rotate(2deg);
+    }
+
+    .gallery-item .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Indie Flower', cursive;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .gallery-item .img-placeholder.g1 {
+      background: linear-gradient(135deg, #2c3e60, #c0392b);
+    }
+
+    .gallery-item .img-placeholder.g2 {
+      background: linear-gradient(135deg, #6a3aa0, #f4a02c);
+    }
+
+    .gallery-item .img-placeholder.g3 {
+      background: linear-gradient(135deg, #1aae5f, #2d6cdf);
+    }
+
+    .gallery-item .img-placeholder.g4 {
+      background: linear-gradient(135deg, #c0392b, #e94e3d);
+    }
+
+    .gallery-item .img-real {
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    .gallery-item .img-real img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-item .img-real video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-item .caption {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--ink);
+      text-align: center;
+      margin-top: 8px;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+    }
+
+    /* CREDITS */
+    .credits-section {
+      margin: 50px 0;
+      padding: 30px;
+      background: rgba(253, 246, 196, 0.4);
+      border: 2px dashed var(--blue-pen);
+      transform: rotate(-0.3deg);
+      position: relative;
+    }
+
+    .credits-section h3 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 32px;
+      color: var(--red-pen);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 19px;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .credits-grid .credit-role {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--blue-pen);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* NAV between projects */
+    .project-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px dashed var(--ink-soft);
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      flex: 1;
+      min-width: 200px;
+      padding: 16px 20px;
+      background: #fff;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.10);
+      text-decoration: none;
+      color: var(--ink);
+      font-family: 'Caveat', cursive;
+      transition: transform 0.3s ease;
+      transform: rotate(-1deg);
+    }
+
+    .nav-link:hover {
+      transform: rotate(0deg) translateY(-3px);
+    }
+
+    .nav-link.next {
+      transform: rotate(1deg);
+      text-align: right;
+    }
+
+    .nav-link .arrow {
+      font-size: 24px;
+      color: var(--red-pen);
+      display: block;
+      font-family: 'Permanent Marker';
+    }
+
+    .nav-link .title-small {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-top: 4px;
+      display: block;
+      color: var(--ink);
+    }
+
+    /* Not found state */
+    .not-found {
+      text-align: center;
+      padding: 80px 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      color: var(--red-pen);
+    }
+
+    .not-found a {
+      display: inline-block;
+      margin-top: 20px;
+      font-family: 'Permanent Marker';
+      color: var(--blue-pen);
+      text-decoration: none;
+      font-size: 26px;
+    }
+
+    @media (max-width: 920px) {
+      .container {
+        padding: 30px 30px 40px;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .project-title {
+        font-size: 56px;
+      }
+
+      .hero-visual .placeholder {
+        font-size: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <a href="index.html" class="back-btn">
+      <span class="arrow">←</span> Back to portfolio
+    </a>
+
+    <div id="project-content"></div>
+  </div>
+
+  <script>
+    // ============ ALL PROJECT DATA ============
+    const projects = {
+      'mango': {
+        title: 'Mango',
+        subtitle: 'Editorial campaign direction for the Spanish heritage house',
+        client: 'Mango', role: 'Art Direction + Visual Design', year: '2025', duration: '1 day',
+        tools: ['Photoshop', 'Illustrator', 'Figma', 'After Effects'],
+        deliverables: ['Campaign visuals', 'Editorial stills', 'Look-book design', 'Social system'],
+        hero: 'M',
+        video: 'Mango.mov',
+        intro: 'Mango is a house that has spent decades defining what minimalism looks like when it\'s allowed to breathe. The brief was to extend that language into a campaign that felt <span class="hl">quietly Spanish</span> — warm without being loud, refined without being cold. We worked in tailoring, in linens, in the kind of off-whites that only photograph well when you respect them.',
+        process: 'Pre-production was almost entirely about light. We tested fabrics for three days before the shoot to understand how each weave caught and released the sun. On set, we kept the camera still and let the garment do the talking — long lenses, soft fill, no movement that wasn\'t earned. The colour grade lifted the whites without bleaching them, which is harder than it sounds.',
+        outcome: 'Hero campaign delivered across print, digital, and store windows. A visual system the in-house team continues to extend into seasonal drops.',
+        quote: 'White is never just white. It\'s every other colour, agreeing not to argue.',
+        gallery: [
+          'Mango1.png',
+          'Mango2.png',
+          'Mango3.png',
+          'Mango4.png',
+          'Mango5.png',
+          'Mango6.png',
+        ],
+        credits: [{ role: 'Art Director', name: 'Manish Wadhwani' }, { role: 'Visual Design', name: 'M. Wadhwani' }, { role: 'Brand team', name: 'Mango' }]
+      },
+      
+      'calo-uk': {
+        title: 'Calo UK',
+        subtitle: 'Product photography direction + brand visuals for the meal subscription launch',
+        client: 'Calo UK', role: 'Art Direction + Visual Design', year: '2025', duration: '1 week',
+        tools: ['After Effects', 'Photoshop', 'Claude Design'],
+        deliverables: ['Email Marketing Creative', 'Product breakdown'],
+        hero: 'C',
+        video: 'Calo Steak Email marketing.mp4',
+        intro: 'Calo arrived in the UK market in a category that has been thoroughly visually exhausted — clean food photography, sans-serif typography, green accents, repeat. The brief was to find a way to feel <span class="hl-pink">appetising and editorial at the same time</span>, without falling into either wellness blandness or food-porn excess.',
+        process: 'Built the visual language around <span class="hl">deconstruction</span>. Each meal photographed as an exploded view — every ingredient floating, every texture earning its place. Tight art direction on every food stylist call. The result reads as both a recipe and a poster.',
+        outcome: 'Hero imagery used across launch campaigns, packaging, and out-of-home placements. A visual signature that immediately differentiated Calo from the rest of the meal-kit shelf.',
+        gallery: [
+          'Asset 1.png',
+        ],
+        quote: 'Show me what you\'re made of — literally.',
+        credits: [{ role: 'Art Director', name: 'Manish Wadhwani' }, { role: 'Visual Design', name: 'M. Wadhwani' }, { role: 'Brand team', name: 'Calo UK' }]
+      },
+      'gully-labs': {
+        title: 'Gully Labs',
+        subtitle: 'The creative direction shifts the emphasis away from the product and toward the culture it represents.',
+        client: 'Gully Labs', role: 'Creative Direction + Art Direction', year: '2025',
+        tools: ['Premiere Pro', 'After Effects', 'Photoshop', 'Adobe Firefly'],
+        hero: 'GL',
+        image: 'https://static.wixstatic.com/media/1251ea_8137721d55724aa28967926b4357d212f000.jpg',
+        video: 'https://video.wixstatic.com/video/1251ea_8137721d55724aa28967926b4357d212/1080p/mp4/file.mp4',
+        intro: 'The creative direction shifts the emphasis away from the product and toward the culture it represents. It draws inspiration from Himachal Pradesh, a region that is often reduced to a few stereotypes, to highlight that there is far more depth and identity beyond those stereotypes.',
+        process: 'Rather than centring the shoe in every frame, the campaign treats the product as one element within a larger cultural composition — the textures, the people, the landscape, the everyday objects that make up the region. The film grammar is deliberately quiet, letting place do the heavy lifting.',
+        outcome: 'A campaign film and supporting stills that position the brand inside a story instead of on top of one — giving Gully Labs a visual identity rooted in specificity, not aesthetics-for-aesthetics.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_d6e30cc51aaa4b7981ae6fdf9e36e6f3~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_f30a864935464b0e82c6612127702d9d~mv2.png',
+        ],
+        credits: [{ role: 'Creative Director / Art Director', name: 'Manish Wadhwani' }, { role: 'Brand', name: 'Gully Labs' }]
+      },
+      'grnch': {
+        title: 'GRNCH',
+        subtitle: 'Cold matcha brand built on the premise that the drinks are his bath water',
+        client: 'GRNCH', role: 'Brand Identity + Creative Direction', year: '2025',
+        tools: ['Photoshop', 'Illustrator', 'Nano Banana'],
+        hero: 'GR',
+        image: 'https://static.wixstatic.com/media/1251ea_e7b676546d6147b7bdac8c033fd1e290~mv2.png',
+        intro: "GRNCH is a cold matcha brand built on the premise that the drinks are his bath water — sourced from wherever he bathed, bottled with minimal explanation, and sold to people he tolerates at best. The brand borrows the energy of exclusive streetwear and hypebeast drops: no subscriptions, no loyalty programs, no online store. Just pop-up locations announced at the last minute and limited can batches that sell out before most people even knew they dropped.",
+        process: "The visual identity leans into cold, dark, suspicious green — cave-dwelling, anti-wellness, anti-influencer. The typography is industrial and blunt. The copy is deadpan and slightly hostile. The cans feel like contraband. The experience of getting one feels like an achievement he didn't intend to reward you with.",
+        outcome: "Brand pillars: scarcity by personality, not strategy — he just doesn't want to make more. Pop-up first, always — locations revealed 24hrs in advance, sometimes less. Drop culture — numbered batches, no restocks, no apologies. Anti-marketing marketing — the brand's whole voice is that it resents having a brand. Think Supreme meets a forest hermit who accidentally made something good.",
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_e7b676546d6147b7bdac8c033fd1e290~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_8135200bfbd347a5bc7566b4aaf7f268~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_2008ce3f7fe24f0ebfdd2bcd53a62dc6~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_8a49e28781f74f35af677772cc3ee645~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_584430c6154345aa93fde18dcd0403d7~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ce8c2a6ed09942e0b56cee8f2e51d98c~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_2a5eebe26eb047149b054daac1eb078b~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_66849901a26b415bbd681fe2f427d796~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_1fdb7ef5e49a4b5296f1f4b626027fdd~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_df36675c722744d4b5ec722a2da75144~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_64e6e8dc233240b180fcf2a4e4bcc8a9~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_346c3c34683b4667bace72f801ff48c4~mv2.png',
+        ],
+        credits: [{ role: 'Brand Identity + Creative Direction', name: 'Manish Wadhwani' }]
+      },
+      'balmain': {
+        title: 'Balmain',
+        subtitle: 'Fragments du temps — an end-of-year lookbook reflecting the global mood of the year',
+        client: 'Balmain', role: 'Art Director', year: '2026',
+        tools: ['Photoshop', 'Illustrator', 'Nano Banana', 'Weavy AI', 'InDesign'],
+        hero: 'B',
+        image: 'https://static.wixstatic.com/media/1251ea_e8dfca2033804b70b1691f26bc5721d5~mv2.png',
+        intro: 'Fragments du temps — an end-of-year lookbook for Balmain that reflects the global mood of the year. Each edition translates key cultural and global events into a high-fashion visual narrative.',
+        process: 'The lookbook functions as an annual series, with each edition inspired by the year\'s most impactful themes. Over time, these editions build a visual timeline, allowing viewers to revisit past years and understand them through subtle visual cues and symbolism.',
+        outcome: 'Four thematic chapters — Échos du conflit, Silhouettes Without Souls, The Final Bloom, Till The Last Drop — woven into a single annual edition.',
+        gallery: [
+          // Book pictures
+          'https://static.wixstatic.com/media/1251ea_ecddc28e908545e78d2d467a991f6a7e~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_9ed1fabbd3d8413eb5737c9464bfb8a2~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1506bb88853e4c8eafd486eb3fd5712a~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_24a4e7758eff437d84d7a76bce290d58~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1e795e0b7adc4b4ebadf42a7098d26d1~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_419fea9f6597436aa6d479688f4eec3e~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_2e2a05e9fc644716bb64ad1a556ae4c7~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_f31a6ef49afa4f46b6f22bc0873ea763~mv2.png',
+          // Model image
+          'https://static.wixstatic.com/media/1251ea_7d506a9770f34d76a16069e7a7bf0c31~mv2.png',
+        ],
+        credits: [{ role: 'Art Direction', name: 'Manish Wadhwani' }, { role: 'Brand reference', name: 'Balmain' }]
+      },
+      'f1': {
+        title: 'F1',
+        subtitle: 'F1 Vertical billboards — motion graphics for two F1 teams',
+        client: 'F1', role: 'Art Director + Motion Graphics Artist', year: '2025',
+        tools: ['After Effects', 'Photoshop', 'Illustrator', 'Premiere Pro'],
+        hero: 'F1',
+        video: 'ferrari.mp4',
+        intro: 'Two motion graphics inspired by the distinct brand language of their respective F1 teams. The animations focus on speed, precision, and clarity, using clean transitions and bold visual cues to ensure strong readability in large-scale billboard formats.',
+        process: 'Each piece was built tight to its team\'s visual system — typography, palette, motion logic — so the work felt like an extension of an existing brand, not an outside interpretation. Designed for vertical billboard placement: composition reads top-to-bottom, primary information loaded in the upper third.',
+        outcome: 'By aligning closely with each team\'s branding, the final pieces not only capture the intensity of Formula 1 but also maintain consistency with their established visual systems.',
+        gallery: [
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_08d6db717bd64f34ba683034159b2668/720p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_08d6db717bd64f34ba683034159b2668f000.jpg'
+          },
+          'https://static.wixstatic.com/media/1251ea_509fb65a80c24c98b4a13767e6b9b56e~mv2.jpg',
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_5824f0baf7904d7380564cc97a00f4a8/720p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_5824f0baf7904d7380564cc97a00f4a8f000.jpg'
+          },
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_50e32d29d39c43aebd986aae00a9ada2/720p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_50e32d29d39c43aebd986aae00a9ada2f000.jpg'
+          },
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_d1b2eecfc579443bae1e3255a5c88587/720p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_d1b2eecfc579443bae1e3255a5c88587f000.jpg'
+          },
+          'https://static.wixstatic.com/media/1251ea_ad149040ffaf478bb143e710693b0f17~mv2.png',
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_53ddc7959ea942c382bfa0e6af62ac75/720p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_53ddc7959ea942c382bfa0e6af62ac75f000.jpg'
+          },
+        ],
+        credits: [{ role: 'Art Direction + Motion Graphics', name: 'Manish Wadhwani' }]
+      },
+      'roads-we-walk': {
+        title: 'The Roads We Walked',
+        subtitle: 'Immersive piece for the 80th anniversary of the Pan African Congress, IWM North',
+        client: 'Soup CO. & Imperial War Museum', role: 'Camera Assistant + Gaffer', year: '2025',
+        tools: ['On-set lighting + camera ops'],
+        hero: 'RW',
+        image: 'https://static.wixstatic.com/media/1251ea_a43fb66c8577420a916399c75b76c368~mv2.png',
+        video: 'The Roads We Walk.mp4',
+        intro: "It's been a while in the making but what a joy to work with Young Identity on this immersive ode to the Pan African Congress that took place in Manchester on its 80th anniversary, looking at the legacy and impact of the congress.",
+        process: '"I wonder, Manchester, did you know our cobbled streets are still paving the future?" The piece weaves spoken-word with archival material and newly shot imagery, building an experience designed to live inside the museum, not on a screen.',
+        outcome: "You can see 'The Roads We Walked' every day at 12pm in IWM North.",
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_3620cea25d44405299d6fb0765be6005~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_b93fe1a7904e496d9e4a1a87623db212~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_862d3b6ec0174e52bb26421811f099b5~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_277aa18b9e7843fbb78ddcc8a0af9f89~mv2.png',
+        ],
+        credits: [{ role: 'Production House', name: 'Soup CO. & Imperial War Museum' }, { role: 'Spoken word + collaboration', name: 'Young Identity' }, { role: 'DOP', name: 'Percy Dean' }, { role: 'Camera Assistant + Gaffer', name: 'Manish Wadhwani' }]
+      },
+      'la-mer': {
+        title: 'La Mer',
+        subtitle: 'Spec photography series — extending an existing Visual DNA',
+        client: 'La Mer (spec project)', role: 'Art Direction + Visual Design', year: '2025', duration: '2 weeks',
+        tools: ['Photoshop', 'Illustrator', 'Nano Banana', 'Veo 3.1'],
+        deliverables: ['Spec photo series', 'Billboard mock-ups (print + digital)', 'Social-ready assets', 'Print-ready visuals'],
+        hero: 'LM',
+        image: 'https://static.wixstatic.com/media/1251ea_0c7e5a7a6c5648b5a5ed3d68f604b37e~mv2.png',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_244cd30a45184bda8ef4fd7219cb7969~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_838277f672614d31937fc3cb342a549c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_4b80faf3e09847d29e74ed82fa85694c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ffc96a8bc35d4b24a6a9a1ef719f7910~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_c34bd095bc3d4e5d9c9bbda89b39eec3~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_2744909726ed4ceebec18f0a9ccd58a3~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_edf99659ead245f19d79e03802715254~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_c37842df18ed4a4da434ea96b0fdf931~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_9f0c8060b91444d2b56f91e918fc977c~mv2.png'
+        ],
+        intro: 'A self-initiated spec project. Using La Mer\'s existing <span class="hl">Visual DNA</span> as the constraint, I built a photo series designed to live across their website, social platforms, and print materials — without anyone briefing me to. The goal was less about reinvention and more about respect: could I extend a luxury brand\'s visual language convincingly enough that the work could slot directly into their existing ecosystem?',
+        process: 'Started by reverse-engineering La Mer\'s house style — the cyan-shifted highlights, the weightlessness in product framing, the way negative space carries as much meaning as the hero subject. Then built a series of images that hit those notes across multiple formats: square crops for social, widescreen for billboards, vertical for editorial. <span class="hl-pink">Versatility was the brief I gave myself</span> — every asset had to adapt without losing its identity.',
+        outcome: 'Final deliverable: a 9-piece visual system covering print billboards, digital billboards, social tiles, and editorial mock-ups. Used as portfolio proof of capability for brand-extension work.',
+        quote: 'You earn the right to extend a brand by understanding it more carefully than its owners do.',
+        credits: [{ role: 'Art Director / Visual Designer', name: 'Manish Wadhwani' }, { role: 'Concept · Execution · Post', name: 'M. Wadhwani' }, { role: 'Visual DNA reference', name: 'La Mer (brand inspiration)' }]
+      },
+      'cute-labs': {
+        title: 'Cute Labs',
+        subtitle: 'GL002 AANGAN BLUE — a story-led creative pairing for vertical billboards and social media',
+        client: 'Cute Labs', role: 'Creative Direction + Design', year: '2024',
+        tools: ['Photoshop', 'Illustrator', 'After Effects', 'Premiere Pro'],
+        hero: 'CL',
+        image: 'https://static.wixstatic.com/media/1251ea_c55bc3b205344290a9b9236af7dae1e5f000.jpg',
+        video: 'https://video.wixstatic.com/video/1251ea_c55bc3b205344290a9b9236af7dae1e5/1080p/mp4/file.mp4',
+        intro: "GL002 AANGAN BLUE is a pair created to tell the story of a small bed and breakfast that has caught people's attention due to the owner's beloved pet dog.",
+        process: "I picked the pair and created two creatives for vertical billboards and social media, highlighting the cuteness of the story.",
+        outcome: "Using these creatives to shine a light on the pair during creative downtime.",
+        gallery: [
+          {
+            video: 'https://video.wixstatic.com/video/1251ea_b305b85246cb40a999cbf62d8212d41b/1080p/mp4/file.mp4',
+            poster: 'https://static.wixstatic.com/media/1251ea_b305b85246cb40a999cbf62d8212d41bf000.jpg'
+          },
+        ],
+        credits: [{ role: 'Creative Direction + Design', name: 'Manish Wadhwani' }, { role: 'Brand', name: 'Cute Labs' }]
+      },
+      'non-finito': {
+        title: 'Non Finito',
+        subtitle: 'Visual series',
+        client: 'Personal Project', role: 'Visual Design + Art Direction', year: '2025',
+        tools: ['Photoshop', 'Nano Banana', 'Illustrator'],
+        hero: 'NF',
+        image: 'https://static.wixstatic.com/media/1251ea_00f8bdea64ee4de4bb9eec2d43e4c197~mv2.png',
+        intro: 'A visual series exploring the unfinished — borrowing its name from non finito, the Renaissance technique of leaving sculptures partially carved as a deliberate aesthetic choice.',
+        process: 'A square-format study built across sixteen images. Each frame is its own composition, but the series reads as one continuous thought.',
+        outcome: 'A self-contained set of work that doesn\'t need captions to be looked at twice.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_00f8bdea64ee4de4bb9eec2d43e4c197~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_8394fa1c466e4ef194d9db5d6a6c9648~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_27d18daa52a246c095214551d69dec50~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_50564a4bde664fd7b0506b7b1a982e6c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1b9b6423d54f4941ad719423ebc71101~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_3be4c6fb044c4da3a9b69e694fd1372d~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_0c5c4144300f4b6893805d786ba5a3e7~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_c13c8dc40f0e4ebeb18309269c1c11a8~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1d8fa8ebce14489d8f329117f2d141ff~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_4be7af9ce60943698d159980b8102021~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ff2aa2a005744190a87779e38b8320e0~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_fbb3274d75d4403caba4bcee8a60a89c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_c3a2aa960339413bbdd1cbebfb82e0c1~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1fbe6c6daf214560844c5693ea49f296~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_7b58df2a628748ea903441357507dd70~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_6560847aca0e4c16ae51cee61ee2481c~mv2.png',
+        ],
+        credits: [{ role: 'Visual Design + Art Direction', name: 'Manish Wadhwani' }]
+      },
+      'the-test': {
+        title: 'The Test',
+        subtitle: "I-Ling's experience whilst taking her Life in the UK test",
+        client: 'Old Hall Films & British Film Institute', role: 'Camera Trainee', year: '2024',
+        tools: ['On-set production tools'],
+        hero: 'TT',
+        image: 'https://static.wixstatic.com/media/1251ea_fa867772d9834ec18ae28acf8e0e0388~mv2.jpg',
+        intro: "I-Ling's experience whilst taking her Life in the UK test reminds her of the difficulties and constraints she faces as an immigrant working hard to get her citizenship.",
+        process: 'Camera Trainee on a BFI-supported short. The role was about supporting the camera department through prep, on-set ops, and turnover — the granular work that lets the DOP and Director keep their attention where it needs to be.',
+        outcome: 'A festival short with a personal, immigrant-led perspective, and a credit on a BFI-backed production.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_62b22edaa6ad4a3e97aa65c23530170e~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_f95885b31ac74a13a381920ab0639df8~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ead478f8298f4dddb10f9ecdb6571d08~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_6ed6278bf8434b5193da8f8f37a7f56d~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_42f1bbc996714ba5a2477c2919b04d60~mv2.png',
+        ],
+        credits: [{ role: 'Production House', name: 'Old Hall Films & British Film Institute' }, { role: 'Director', name: 'Hsieh Meng Han' }, { role: 'DOP', name: 'Hsien Yu Niu' }, { role: 'Camera Trainee', name: 'Manish Wadhwani' }]
+      },
+      'the-movement': {
+        title: 'The Movement',
+        subtitle: '16mm Film Experiment — two kinds of motion',
+        client: 'Personal Project', role: 'Art Director + Cinematographer', year: '2024',
+        hideGallery: true,
+        tools: ['16mm Film', 'DaVinci Resolve'],
+        hero: 'TM',
+        video: 'the-movement.mp4',
+        intro: "An experiment in two kinds of motion — the body's, and the film's. One moves through space. The other moves through the camera. I wanted to see what happened when you stopped treating them as separate things.",
+        process: "Shot on film because film has its own physicality. It stretches, grains, catches light differently than digital ever will. The medium isn't a filter over the subject here. It's a second performer.",
+        outcome: 'No brief. No client. Just a question I wanted to answer by doing it.',
+        credits: [{ role: 'Direction + Cinematography', name: 'Manish Wadhwani' }]
+      },
+      'opiq': {
+        title: 'Opiq',
+        subtitle: "Pick Your Shades — a brand identity and launch campaign built around one question: What's Missing?",
+        tagline: 'Opiq — Pick Your Shades',
+        client: 'Opiq', role: 'Brand Identity, Art Direction, Campaign Design', year: '2024',
+        tools: ['Photoshop', 'Illustrator', 'After Effects'],
+        hero: 'OP',
+        video: 'Snapinst.app_video_AQMNXQskf5JUn6G93sNv-Z_lwHrN4VeV5s2teQQL2ICrOMnU0FDog-eCYjlBQ2rBVy7IcD6R_pdK416AXvGLC6SV.mp4',
+        intro: "A brand identity and launch campaign built around one question: <em>What's Missing?</em> Every visual hides the eyes — taped over, pixelated, censored, shattered, cut out. The answer is always the same: shades.",
+        process: 'The system was designed to stretch across grunge, glitch, collage, editorial, and street — so the brand could show up in a dozen different worlds without ever looking like the same ad twice.',
+        outcome: "This was the first brand identity I helped build, and it's still the project that taught me the most about what a strong idea can carry.",
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_2fe5995dff3647ff856741d2c4bc9a14~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_dc2fed67f1f64e26a0844f3d3ca4141d~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_5e571843c46946fda2e68cbb791ccc2c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_709cf6925e0147eeafeada0acf3f76e4~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_457e38cb57a04fad8d8c42b0302de987~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_9b345bc51871485b83b284362214698c~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1c131eb678a0429b868010f7f4d8d910~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ca75861e1bfb47dfa084ccc25e2e4350~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_3b972b81c83f4848a620d0c523e0103a~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_5d3117c3fd294ee488d2f6a5e5cb883df003.jpg',
+          {video: 'Snapinsta.app_video_AQNcnysJ29cRyI1eDnBPqoAxt6UD-u9X3s8wexkeOCqxCYMxkLtAtpPpVXady4mjJWDsKLPNLRb42Z9TiXG1H7nv.mp4',},
+          'https://static.wixstatic.com/media/1251ea_d71b56b648eb43eab447984501d2f4b5f003.jpg',
+          'https://static.wixstatic.com/media/1251ea_03dc7fa76b864ca580c7a67cb3bfb011~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_e8475d91a8ae4ccb80d1fe3b77e12c59~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_21a53c9f03c14987babd3d19f9abcde8~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_296be4327c7d4b1a84e9726e31762533~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_5144834bac554f1fb49b4467d8422c61~mv2.jpg',
+          {video: 'Snapinsta.app_video_AQMTaT_138nCjyRuIP1EwSCwTpYTrdsFJbOe_uWCMKQr1SlA7UtZcbqIvlajPSePzommiiD9TU51O9t2OZ0uON1z',},
+        ],
+        credits: [{ role: 'Brand identity, art direction, campaign design', name: 'Manish Wadhwani' }]
+      },
+      'lahore-sky': {
+        title: 'Lahore Sky',
+        subtitle: 'A film by Danish Nadeem',
+        client: 'Danish Nadeem Hayat (Production House)', role: 'Art Director + Cinematographer', year: '2024',
+        tools: ['Sony a7c', 'Lighting equipment'],
+        hero: 'LS',
+        image: 'https://static.wixstatic.com/media/1251ea_9d906893f3034390bbb125252a4dd0f0~mv2.png',
+        video: 'lahore-sky.mp4',
+        intro: 'Lahore Sky — directed by Danish Nadeem, produced by Danish Nadeem Hayat. I shot the film as Director of Photography and Art Director.',
+        process: 'Cinematography led the mood. Lighting and composition built around the script\'s emotional beats, then graded to hold those choices in the final image.',
+        outcome: 'Is an Advertisement.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_51f96e78d4c941a69dfae9b493e523f2~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_3a5b14c250234ad0a11373031aff3fe7~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_9d906893f3034390bbb125252a4dd0f0~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_605e0b0dd1524fe89e9ae925d381a9fb~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_8f338f271c884495b5873b70129cd723~mv2.png',
+        ],
+        credits: [{ role: 'Production House', name: 'Danish Nadeem Hayat' }, { role: 'Director', name: 'Danish Nadeem' }, { role: 'DOP + Art Director', name: 'Manish Wadhwani' }]
+      },
+      'mirror-of-fiction': {
+        title: 'Mirror Of Fiction',
+        subtitle: 'Experimental piece — narrative reflections',
+        client: 'Personal / Gallery', role: 'Director + Designer', year: '2024',
+        tools: ['After Effects', 'Premiere Pro', 'Photoshop'],
+        deliverables: ['Single-channel video', 'Gallery installation'],
+        hero: 'MF',
+        intro: 'Mirror Of Fiction is an experiment in narrative recursion — a piece that watches itself being watched. The viewer\'s position is implicated in the cut. There\'s no protagonist except the audience.',
+        process: 'Heavy compositing work. Every frame is a layered construction. Built bespoke After Effects rigs to handle the recursive masking, then conformed to a stable colour pipeline for gallery projection.',
+        outcome: 'Shown in two group exhibitions, picked up for a solo screening conversation.',
+        quote: 'The frame is always also a mirror.',
+        credits: [{ role: 'Director / Designer', name: 'Manish Wadhwani' }]
+      },
+      'within-minds': {
+        title: 'Within Minds',
+        subtitle: 'A short film',
+        client: 'Independent', role: 'Writer + Director + Cinematographer', year: '2024',
+        tools: ['DaVinci Resolve', 'Premiere Pro', 'After Effects'],
+        hero: 'WM',
+        image: 'https://static.wixstatic.com/media/1251ea_fb31c804bb874bba97934de4ad6d154b~mv2.png',
+        youtube: 'https://youtu.be/YxtjPshJCqM?si=Yto7QCTwS6USkL34',
+        intro: 'A short film I wrote, shot, and edited — built around the idea of putting the interior of a character on screen in a way that didn\'t need to be stated out loud.',
+        process: 'Solo authorship across the chain — writing, lensing, edit. The visual language was developed alongside the script so each draft was already framed for camera. The cut leaned into restraint: hold the frame, trust the actor.',
+        outcome: 'A self-contained piece that lives or dies on its central performance, which is exactly the territory I wanted to test.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_fb31c804bb874bba97934de4ad6d154b~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_96ac61e47b7b4354bb8caef178af7670~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_1006d1d11e764911844a74f4457ca9e5~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_54516a03a3704e7097bcd751e6d861e9~mv2.jpg',
+          'https://static.wixstatic.com/media/1251ea_71e63193161d4283a6dbc3788511ee4b~mv2.png',
+        ],
+        credits: [{ role: 'Director / DOP / Editor', name: 'Manish Wadhwani' }]
+      },
+      'dwayne': {
+        title: 'Dwayne',
+        subtitle: '"Home is a feeling not a place" — short film for Factory International at Aviva Studios',
+        client: 'Factory International', role: 'Director + Editor', year: '2023',
+        tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects'],
+        hero: 'D',
+        image: 'https://static.wixstatic.com/media/1251ea_d162a7b81c75493397fbe7b0ddeb2268~mv2.png',
+        youtube: 'nHTZC602jtA',
+        intro: '"Home is a feeling not a place" was an event for Factory International at Aviva Studios.',
+        process: 'Inspired by The Welcome — a nine-day cultural celebration to mark the opening of Aviva Studios in November 2023 — young participants wrote poetry centred around the theme \'home is a feeling, not a place\'.',
+        outcome: "Poems by God's Victory and Dwayne were shared with us to create a short film that best portrays the poetry.",
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_d162a7b81c75493397fbe7b0ddeb2268~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_cc50ca8e32ed4044b8488374e7227fdf~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_74e74ca71c2a425ab5e92fc22d8426b1~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_94fdf3627a1b4ad5bcee5075ee8e8265~mv2.png',
+        ],
+        credits: [{ role: 'Director of Photography + Art Director + Editor', name: 'Manish Wadhwani' }, { role: 'Commissioned by', name: 'Factory International' }, { role: 'Poetry', name: "God's Victory & Dwayne" }]
+      },
+      'final-goodbye': {
+        title: 'The Final Goodbye',
+        subtitle: 'The touching story of Tom and Mary at their favourite coffee shop',
+        client: 'Independent', role: 'Writer + Director + Cinematographer', year: '2024',
+        tools: ['DaVinci Resolve', 'Premiere Pro', 'After Effects'],
+        hero: 'FG',
+        image: 'https://static.wixstatic.com/media/1251ea_e5566067c04640aaa9b5b2a923e5a7ef~mv2.png',
+        youtube: 'uxycHU7H2nA',
+        intro: '"The Final Goodbye" tells the touching story of Tom and Mary at their favourite coffee shop, delving into themes of love and grief.',
+        process: 'A two-hander built around a single location and the texture of a quiet afternoon. The blocking respects the table — every camera move and every lighting choice was about preserving the intimacy of two people who already know each other too well.',
+        outcome: 'A short film about endings that didn\'t need to raise its voice to land.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_0745ffe4140e4425b51f9d960f472912~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_3f577a2a8bcb44ad8b5db3f333555606~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_e5566067c04640aaa9b5b2a923e5a7ef~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_ba490a04d78746e5b0c6b293b18ffa09~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_eca44d10ac9c468194ae34b6cd8280ec~mv2.png',
+        ],
+        credits: [{ role: 'Writer / Director / Cinematographer', name: 'Manish Wadhwani' }]
+      },
+      'lonely-chessboard': {
+        title: 'A Lonely Chessboard',
+        subtitle: 'Travis questions his identity as an artist. He hopes to regain his sense of purpose by defeating Alexis, an A.I. opponent, in a chess game.',
+        client: 'Independent — BFI Sci-Fi Short Film Festival Runner-Up', role: 'Writer + Director + Cinematographer + VFX Compositor', year: '2024',
+        tools: ['DaVinci Resolve', 'Premiere Pro', 'After Effects', 'Nuke'],
+        hero: 'CB',
+        image: 'https://static.wixstatic.com/media/1251ea_662e5aac5a6d4574b58289e28e198843~mv2.png',
+        youtube: '7LzfE43FJMA',
+        intro: 'Travis, the protagonist, questions his identity as an artist, feeling disconnected from his passion. He hopes to regain his sense of purpose by defeating Alexis, an A.I. opponent, in a chess game.',
+        process: 'Written, directed, shot, and composited solo. The VFX work was central to the film — Alexis exists only through compositing, so every shot involving her had to plate, track, and integrate cleanly enough that the audience reads her as present, not as an effect.',
+        outcome: 'Runner-up at the BFI Sci-Fi Short Film Festival.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_662e5aac5a6d4574b58289e28e198843~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_a277ec64a9e6422ab82d221dae7145e3~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_53c774983a07436699ffb79d128f65a0~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_34a3c1dcfe9f4bd0bb9907145f95350f~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_e8f52f64a3774dd4a5f957ff4000549a~mv2.png',
+        ],
+        credits: [{ role: 'Writer / Director / DOP / Editor / VFX', name: 'Manish Wadhwani' }, { role: 'Recognition', name: 'BFI Sci-Fi Short Film Festival Runner-Up' }]
+      },
+      'crongton': {
+        title: 'Crongton',
+        subtitle: 'BBC drama — directed by Ethosheia Hylton',
+        client: 'New Pictures & BBC', role: 'Camera Trainee', year: '2024',
+        tools: ['On-set production tools'],
+        hero: 'CR',
+        image: 'https://static.wixstatic.com/media/1251ea_18d07e2f68844f86a8d06e1e28e95427~mv2.jpg',
+        youtube: 'fchRfI0yhZo',
+        intro: "McKay's life worsens after mum's death. Dad works to stop bailiffs, brother tempts nightly trouble. Straying to help a girl, McKay faces a crazy ex, violent kids and gangster.",
+        process: 'Camera Trainee on a New Pictures / BBC production. The role spanned camera prep, on-set ops, and supporting the wider camera department through long shoot days on a returning broadcast drama.',
+        outcome: 'A credit on a major BBC drama and a working understanding of a production scale very different from independent shorts.',
+        gallery: [
+          'https://static.wixstatic.com/media/1251ea_5272f71d2acf4a54849c6b08d7ffba1a~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_243ec528566941ff9570c29d2a6dfc86~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_a712832292384689963e972787845918~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_b2f5404b821e45ac8cef64a225bb8a9e~mv2.png',
+          'https://static.wixstatic.com/media/1251ea_0fa100c1cd1545b194c46a55e66c06fd~mv2.png',
+        ],
+        credits: [{ role: 'Production House', name: 'New Pictures & BBC' }, { role: 'Director', name: 'Ethosheia Hylton' }, { role: 'DOP', name: 'Bani Mendy' }, { role: 'Camera Trainee', name: 'Manish Wadhwani' }]
+      },
+
+      'arcc': {
+        title: 'ARCC',
+        subtitle: 'Brand rebranding for an electric bike conversion company',
+        client: 'ARCC', role: 'Brand Rebranding + Logo Creation + Brand Identity', year: '2025',
+        tools: ['Photoshop', 'Illustrator', 'Figma', 'Nano Banana'],
+        hero: 'AR',
+        image: 'ARCC copy.png',
+        intro: 'ARCC is a UK-based electric bike conversion company. The rebrand was about pulling them out of the visually crowded e-bike category and giving them an identity that felt closer to a high-performance gear brand than a transport one.',
+        process: 'The mark is a cyclist mid-stride, abstracted to its essentials — wheel, frame, motion lines, head. A single colour does the heavy lifting: a vivid green (#2CFF05) against deep black, with mid-grey as the neutral. Typography pairs Silom for display weight with Adobe Clean UX for everything operational. The system is built to perform at billboard scale and on a 32px favicon, with the same energy in both.',
+        outcome: 'A complete identity system — logo lockups, type pairings, colour stack, application across print, signage, packaging, social, and a custom conversion process diagram for the website.',
+        gallery: [
+          'ARCC action shot.png',
+          'ARCC.png',
+        ],
+        credits: [{ role: 'Brand Rebranding + Logo + Identity', name: 'Manish Wadhwani' }, { role: 'Brand', name: 'ARCC' }]
+      },
+
+      'nike': {
+        title: 'Nike',
+        subtitle: 'Motion graphics for the local Nike store digital display',
+        client: 'Nike', role: 'Motion Graphics Artist', year: '2023',
+        hideGallery: true,
+        tools: ['After Effects', 'Photoshop', 'Illustrator', 'Premiere Pro'],
+        hero: 'NK',
+        video: 'nike.mp4',
+        intro: 'A motion piece created for the digital display at my local Nike store. The brief was self-set — match the energy of Nike\'s in-store moving imagery without copying it. Keep it brand-honest, but make the cut feel like it was directed by someone who actually wanted to be there.',
+        process: 'Built around tight type animation, hard cuts on beat, and product hero moments that hold just long enough to land. Worked entirely from publicly available brand assets and reference. The motion language sticks close to Nike\'s house grammar — bold sans, sharp transitions, restrained colour — but pushes pacing slightly faster than the brand\'s standard.',
+        outcome: 'A 25-second loop designed for vertical digital displays. Self-initiated spec work used as a portfolio piece and as a study in matching a global brand\'s motion language at a level that could plausibly be served in-store.',
+        credits: [{ role: 'Motion Graphics + Direction', name: 'Manish Wadhwani' }, { role: 'Brand reference', name: 'Nike' }]
+      },
+
+      'revolut': {
+        title: 'Revolut',
+        subtitle: 'Spec — bento design system for the Revolut interface',
+        client: 'Revolut (Spec)', role: 'Visual Design + Motion', year: '2025',
+        hideGallery: true,
+        tools: ['Figma', 'After Effects', 'Photoshop'],
+        hero: 'RV',
+        video: 'revolut bento design.mp4',
+        intro: 'A speculative bento-style design exploration for the Revolut interface. Bento layouts have become shorthand for modern fintech UI — the question I wanted to answer was whether the format could carry more than just a feed of cards, and actually structure how someone reads their financial life at a glance.',
+        process: 'Modular grid built around four primary tile types: balance hero, transaction snapshot, investment performance, and quick-action shortcuts. Motion design uses subtle scale and opacity shifts to draw the eye through the hierarchy without resorting to colour gymnastics. The brand language stays close to Revolut\'s actual visual identity — black ground, restrained accents, generous spacing.',
+        outcome: 'A single-screen motion study showing the bento layout in action — designed as a concept piece, not a redesign proposal. Built to demonstrate how interface motion can do narrative work, not just decoration.',
+        credits: [{ role: 'Visual Design + Motion', name: 'Manish Wadhwani' }, { role: 'Brand reference', name: 'Revolut' }]
+      },
+
+      'uber': {
+        title: 'Uber',
+        subtitle: 'Spec — motion graphics for Uber Eats',
+        client: 'Uber (Spec)', role: 'Motion Graphics Artist', year: '2025',
+        hideGallery: true,
+        tools: ['After Effects', 'Illustrator', 'Photoshop'],
+        hero: 'UB',
+        image: 'uber thumbnail.png',
+        video: 'uber motion graphics.mp4',
+        intro: 'A speculative motion graphics piece built around Uber Eats\' visual identity — green ground, black wordmark, food as hero. The exercise was about working inside an existing global brand system without diluting it, and finding small moments of motion that feel native to the brand rather than imposed on top.',
+        process: 'Started with the wordmark animation: a clean reveal that respects the existing logo construction. Built outward from there into food-led transitions — plate-to-plate cuts, ingredient drops, end-card resolves. Pacing was kept slightly slower than typical food advertising, which usually overcuts. The result reads more confident, less anxious.',
+        outcome: 'A self-initiated spec piece exploring how Uber Eats\' brand could move at a level of polish consistent with their broader campaign work. Built to show as a portfolio study in restraint-first motion.',
+        credits: [{ role: 'Motion Graphics + Direction', name: 'Manish Wadhwani' }, { role: 'Brand reference', name: 'Uber Eats' }]
+      },
+
+      'adidas': {
+        title: 'Adidas',
+        subtitle: 'Motion graphics for the local Adidas store digital display',
+        client: 'Adidas', role: 'Motion Graphics Artist', year: '2025',
+        hideGallery: true,
+        tools: ['After Effects', 'Photoshop', 'Illustrator', 'Premiere Pro'],
+        hero: 'AD',
+        video: 'Adidas.mp4',
+        intro: 'A motion piece for the digital display at my local Adidas store — paired conceptually with the Nike piece as a study in how two competing global brands ask for very different motion grammar even when working in the same medium.',
+        process: 'Where the Nike piece pushes urgency, this one leans into Adidas\' more layered, more textural visual world. Slightly slower cuts, more room for archive references, type that feels closer to streetwear than sportswear. Built from publicly available reference and brand documentation.',
+        outcome: 'A 20-second loop for vertical digital displays. Self-initiated spec work used as a portfolio piece and as a comparative study against the Nike motion graphics — two brands, same medium, two different answers.',
+        credits: [{ role: 'Motion Graphics + Direction', name: 'Manish Wadhwani' }, { role: 'Brand reference', name: 'Adidas' }]
+      },
+
+      'aspire': {
+        title: 'Aspire',
+        subtitle: 'Motion graphics — [one line description]',
+        client: 'Aspire', role: 'Motion Graphics Artist', year: '2025',
+        hideGallery: true,
+        tools: ['After Effects', 'Illustrator', 'Photoshop'],
+        hero: 'AS',
+        video: 'aspire.mp4',
+        intro: 'Brief — what this project was and why it existed.',
+        process: 'How you built it — decisions, motion language, brand logic.',
+        outcome: 'What it became and what it demonstrates.',
+        credits: [
+          { role: 'Motion Graphics + Direction', name: 'Manish Wadhwani' },
+          { role: 'Brand reference', name: 'Aspire' }
+        ]
+      },
+
+      'flow': {
+        title: 'Flow',
+        subtitle: 'UGC — [one line description]',
+        client: 'Flow', role: 'UGC Creator + Direction', year: '2025',
+        tools: ['Premiere Pro', 'After Effects'],
+        hero: 'FL',
+        video: 'flow.mp4',
+        intro: 'Brief — what this project was and why it existed.',
+        process: 'How you approached the UGC format — tone, platform, creative decisions.',
+        outcome: 'What it became and what it demonstrates.',
+        gallery: [
+          'flow-still-1.jpg',
+          'flow-still-2.jpg',
+        ],
+        credits: [
+          { role: 'UGC Creator + Direction', name: 'Manish Wadhwani' },
+          { role: 'Brand', name: 'Flow' }
+        ]
+      }
+    };
+
+    // Ordered list for navigation
+    const projectOrder = ['mango', 'calo-uk', 'gully-labs', 'grnch', 'balmain', 'f1', 'roads-we-walk', 'la-mer', 'cute-labs', 'non-finito', 'the-test', 'the-movement', 'opiq', 'lahore-sky', 'mirror-of-fiction', 'within-minds', 'dwayne', 'final-goodbye', 'lonely-chessboard', 'crongton', 'arcc', 'nike', 'revolut', 'uber', 'adidas', 'aspire', 'flow'];
+
+    // ============ RENDER ============
+    function getId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
+    }
+
+    function render() {
+      const id = getId();
+      const container = document.getElementById('project-content');
+      if (!id || !projects[id]) {
+        container.innerHTML = `<div class="not-found">
+      Hmm, that project page doesn't exist (yet).
+      <br><a href="index.html">← Back to portfolio</a>
+    </div>`;
+        document.title = 'Project not found — Manish Wadhwani';
+        return;
+      }
+      const p = projects[id];
+      const idx = projectOrder.indexOf(id);
+      const prevId = idx > 0 ? projectOrder[idx - 1] : projectOrder[projectOrder.length - 1];
+      const nextId = idx < projectOrder.length - 1 ? projectOrder[idx + 1] : projectOrder[0];
+      const prev = projects[prevId];
+      const next = projects[nextId];
+
+      document.title = `${p.title} — Manish Wadhwani`;
+
+      const toolsList = (p.tools || []).map(t => `<li>${t}</li>`).join('');
+      const deliverablesList = (p.deliverables || []).map(d => `<li>${d}</li>`).join('');
+      const creditsList = (p.credits || []).map(c => `
+    <div><span class="credit-role">${c.role}</span>${c.name}</div>
+  `).join('');
+
+      container.innerHTML = `
+    <section class="project-hero">
+      <div class="project-meta">
+        <span>${p.year || ''}</span>
+        <span class="dot">·</span>
+        <span>${p.client || ''}</span>
+        <span class="dot">·</span>
+        <span>${p.role || ''}</span>
+      </div>
+      <h1 class="project-title">${p.title} <span class="accent">↗</span></h1>
+      <p class="project-subtitle">${p.subtitle || ''}</p>
+    </section>
+
+    <div class="hero-visual${(!p.image && !p.video && !p.youtube) ? ' placeholder-mode' : ''}">
+      ${p.youtube
+          ? `<div style="position:relative; padding-top:56.25%; background:#000;"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${p.youtube}?rel=0" title="${p.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`
+          : (p.video
+            ? (() => {
+              const sources = ['1080p', '720p', '480p'].map(q => p.video.replace(/\/(1080p|720p|480p)\//, '/' + q + '/'));
+              const unique = [...new Set(sources)];
+              return `<video autoplay muted loop playsinline controls poster="${p.image || ''}">${unique.map(s => `<source src="${s}" type="video/mp4">`).join('')}</video>`;
+            })()
+            : (p.image
+              ? `<img src="${p.image}" alt="${p.title}">`
+              : `<div class="placeholder">${p.hero}</div>
+      <div class="placeholder-note">// replace with hero image //</div>`))
+        }
+    </div>
+
+    <div class="content-grid">
+      <aside class="meta-side">
+        <div class="meta-block">
+          <h4>Client</h4>
+          <div class="value">${p.client || '—'}</div>
+        </div>
+        <div class="meta-block">
+          <h4>Role</h4>
+          <div class="value">${p.role || '—'}</div>
+        </div>
+        ${p.duration ? `<div class="meta-block"><h4>Duration</h4><div class="value">${p.duration}</div></div>` : ''}
+        ${p.tools ? `<div class="meta-block"><h4>Tools</h4><ul>${toolsList}</ul></div>` : ''}
+        ${p.deliverables ? `<div class="meta-block"><h4>Deliverables</h4><ul>${deliverablesList}</ul></div>` : ''}
+      </aside>
+
+      <div class="body-content">
+        <h3>The <span class="accent">brief</span></h3>
+        <p>${p.intro}</p>
+
+        ${p.quote ? `<blockquote>"${p.quote}"</blockquote>` : ''}
+
+        <h3>Process <span class="accent">/</span> approach</h3>
+        <p>${p.process}</p>
+
+        <h3>Outcome <span class="accent">→</span></h3>
+        <p>${p.outcome}</p>
+      </div>
+    </div>
+
+    ${!p.hideGallery ? `<section class="gallery-section">
+      <h2 class="gallery-title">Stills <span class="accent">&amp; frames</span></h2>
+      <div class="gallery-grid">
+        ${p.gallery && p.gallery.length
+            ? p.gallery.map((item, i) => {
+              const isVideo = typeof item === 'object' && item.video;
+              let inner;
+              if (isVideo) {
+                const sources = ['1080p', '720p', '480p'].map(q => item.video.replace(/\/(1080p|720p|480p)\//, '/' + q + '/'));
+                const unique = [...new Set(sources)];
+                const sourceTags = unique.map(s => `<source src="${s}" type="video/mp4">`).join('');
+                inner = `<div class="img-real"><video autoplay muted loop playsinline poster="${item.poster}">${sourceTags}</video></div>`;
+              } else {
+                inner = `<div class="img-real"><img src="${item}" alt="" loading="lazy"></div>`;
+              }
+              return `
+            <div class="gallery-item r${(i % 4) + 1}">
+              ${inner}
+              <div class="caption">Frame ${String(i + 1).padStart(2, '0')}</div>
+            </div>
+          `;
+            }).join('')
+            : `
+            <div class="gallery-item r1"><div class="img-placeholder g1">replace me</div><div class="caption">Frame 01</div></div>
+            <div class="gallery-item r2"><div class="img-placeholder g2">replace me</div><div class="caption">Frame 02</div></div>
+            <div class="gallery-item r3"><div class="img-placeholder g3">replace me</div><div class="caption">Frame 03</div></div>
+            <div class="gallery-item r4"><div class="img-placeholder g4">replace me</div><div class="caption">Frame 04</div></div>
+          `
+          }
+      </div>
+    </section>` : ''}
+
+    <section class="credits-section">
+      <h3>Credits ✦</h3>
+      <div class="credits-grid">
+        ${creditsList}
+      </div>
+    </section>
+
+    <nav class="project-nav">
+      <a class="nav-link prev" href="project.html?id=${prevId}">
+        <span class="arrow">← prev</span>
+        <span class="title-small">${prev.title}</span>
+      </a>
+      <a class="nav-link next" href="project.html?id=${nextId}">
+        <span class="arrow">next →</span>
+        <span class="title-small">${next.title}</span>
+      </a>
+    </nav>
+  `;
+    }
+
+    render();
+  </script>
+</body>
+
+</html>
