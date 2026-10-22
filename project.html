@@ -141,9 +141,13 @@
 
     /* Hero visual */
     .hero-visual {
-      width: 100%;
-      max-width: 900px;
+      /* Width shrinks so the media's full height always fits inside the viewport.
+         --ar (width/height) is set from the real video/image by fitHero() below. */
+      --ar: 1.7778;
+      width: min(100%, 900px, calc((100vh - 48px) * var(--ar)));
+      width: min(100%, 900px, calc((100dvh - 48px) * var(--ar)));
       margin: 40px auto;
+      scroll-margin-top: 24px;
       background: linear-gradient(135deg, #1a2438, #4a5d80);
       position: relative;
       box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
@@ -154,6 +158,10 @@
     .hero-visual video {
       width: 100%;
       height: auto;
+      max-height: calc(100vh - 48px);
+      max-height: calc(100dvh - 48px);
+      object-fit: contain;
+      background: #000;
       display: block;
     }
 
@@ -1346,7 +1354,25 @@
   `;
     }
 
+    // Size the hero box to the media's real aspect ratio so it never exceeds the viewport height
+    function fitHero() {
+      const box = document.querySelector('.hero-visual');
+      if (!box) return;
+      const setAr = (w, h) => { if (w && h) box.style.setProperty('--ar', (w / h).toFixed(4)); };
+      const vid = box.querySelector('video');
+      const img = box.querySelector('img');
+      if (vid) {
+        if (vid.videoWidth) setAr(vid.videoWidth, vid.videoHeight);
+        vid.addEventListener('loadedmetadata', () => setAr(vid.videoWidth, vid.videoHeight));
+      } else if (img) {
+        if (img.complete && img.naturalWidth) setAr(img.naturalWidth, img.naturalHeight);
+        img.addEventListener('load', () => setAr(img.naturalWidth, img.naturalHeight));
+      }
+      // YouTube embed and placeholder stay at the default 16:9
+    }
+
     render();
+    fitHero();
   </script>
 </body>
 
