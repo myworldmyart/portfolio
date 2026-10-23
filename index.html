@@ -969,6 +969,363 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ============ RETRO TVs ============ */
+    .tv-wall {
+      --tv-w: clamp(124px, 22vw, 210px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(var(--tv-w), 1fr));
+      justify-items: center;
+      gap: 34px 18px;
+      margin: 0 0 56px;
+    }
+
+    .tv-heading {
+      grid-column: 1 / -1;
+      font-family: 'Caveat', cursive;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--red-pen);
+      transform: rotate(-2deg);
+    }
+
+    .tv {
+      --w: var(--tv-w);
+      width: var(--w);
+      font-size: calc(var(--w) / 20);
+      position: relative;
+      display: block;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: inherit;
+      font-family: inherit;
+      text-align: center;
+      rotate: var(--r, 0deg);
+      transition: transform .25s, rotate .25s;
+    }
+
+    .tv:hover {
+      transform: translateY(-4px);
+      rotate: 0deg;
+    }
+
+    .tv:focus-visible {
+      outline: 3px solid var(--blue-pen);
+      outline-offset: 8px;
+      border-radius: 12px;
+    }
+
+    .tv-ears {
+      display: block;
+      position: relative;
+      height: 4.4em;
+      background: radial-gradient(1.2em 1em at 50% 100%, #2f2d2a 98%, transparent) no-repeat 50% 100% / 2.4em 1.2em;
+    }
+
+    .tv-ears::before,
+    .tv-ears::after {
+      content: '';
+      position: absolute;
+      bottom: .3em;
+      left: 50%;
+      width: .28em;
+      height: 5em;
+      background: #2f2d2a;
+      border-radius: .2em;
+      transform-origin: bottom center;
+    }
+
+    .tv-ears::before { transform: rotate(-26deg); }
+    .tv-ears::after { transform: rotate(24deg); }
+
+    .tv-body {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 3.8em;
+      gap: .9em;
+      padding: 1.1em;
+      border-radius: 1.8em 1.8em 1.4em 1.4em;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .12), transparent 30%),
+        repeating-linear-gradient(90deg, #7a4a2a 0 .35em, #6d4125 .35em .8em, #74462a .8em 1.1em);
+      box-shadow:
+        inset 0 .15em .2em rgba(255, 255, 255, .25),
+        inset 0 -.3em .5em rgba(0, 0, 0, .35),
+        .2em .7em 1.1em -.2em rgba(40, 25, 10, .45),
+        0 .1em 0 #3d2412;
+    }
+
+    .tv-body::before,
+    .tv-body::after {
+      content: '';
+      position: absolute;
+      top: -.7em;
+      width: 4.6em;
+      height: 1.7em;
+      background: var(--tape);
+      box-shadow: 0 0 0 1px var(--tape-edge);
+    }
+
+    .tv-body::before { left: -1.4em; transform: rotate(-34deg); }
+    .tv-body::after { right: -1.4em; transform: rotate(32deg); }
+
+    .tv-screen {
+      position: relative;
+      display: block;
+      aspect-ratio: 4 / 5;
+      border-radius: 1.3em / 1.1em;
+      overflow: hidden;
+      isolation: isolate;
+      background: #0c0d0c;
+      box-shadow: inset 0 0 .1em .15em #000, 0 0 0 .3em #1d1c1a, 0 0 0 .4em #4a4540;
+      transition: filter .25s;
+    }
+
+    .tv:hover .tv-screen { filter: brightness(1.18); }
+
+    .tv-static {
+      position: absolute;
+      inset: -20%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 11em;
+      opacity: .85;
+      animation: tv-snow .5s steps(1) infinite;
+    }
+
+    @keyframes tv-snow {
+      0% { background-position: 0 0; }
+      20% { background-position: -4em 3em; }
+      40% { background-position: 2em -5em; }
+      60% { background-position: -6em -2em; }
+      80% { background-position: 5em 4em; }
+    }
+
+    .tv-glass {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      border-radius: inherit;
+      background:
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, .13) 0 1px, transparent 1px 3px),
+        radial-gradient(120% 120% at 50% 40%, transparent 55%, rgba(0, 0, 0, .55) 100%),
+        linear-gradient(155deg, rgba(255, 255, 255, .22), transparent 28%);
+    }
+
+    .tv-hint {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: .6em;
+      z-index: 2;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-size: max(15px, 2.4em);
+      color: #fff;
+      text-shadow: 0 0 .3em #000, 0 0 .12em #000;
+    }
+
+    .tv-video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+      opacity: 0;
+    }
+
+    .tv-screen.is-on .tv-video { opacity: 1; }
+    .tv-screen.is-on .tv-static { display: none; }
+
+    .tv-panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: .7em;
+      justify-items: center;
+      padding: .8em .3em;
+      border-radius: .7em;
+      background: linear-gradient(180deg, #e6d9b8, #cdbd92);
+      box-shadow: inset 0 0 0 .12em rgba(0, 0, 0, .18), inset 0 .12em .2em rgba(255, 255, 255, .5);
+    }
+
+    .tv-knob {
+      position: relative;
+      width: 2.3em;
+      height: 2.3em;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #5b5853, #1f1e1c 70%);
+      box-shadow: 0 .15em .2em rgba(0, 0, 0, .5), 0 0 0 .18em #b9aa80;
+      transition: transform .4s;
+    }
+
+    .tv-knob::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: .15em;
+      width: .18em;
+      height: .8em;
+      margin-left: -.09em;
+      background: #e8dcc0;
+      border-radius: .1em;
+    }
+
+    .tv:hover .tv-knob.k1 { transform: rotate(50deg); }
+    .tv:hover .tv-knob.k2 { transform: rotate(-35deg); }
+
+    .tv-grille {
+      align-self: stretch;
+      width: 100%;
+      margin-top: .2em;
+      background: repeating-linear-gradient(0deg, #6d6040 0 .12em, transparent .12em .45em);
+      opacity: .7;
+    }
+
+    .tv-led {
+      width: .7em;
+      height: .7em;
+      border-radius: 50%;
+      background: #7a2a20;
+    }
+
+    .tv:hover .tv-led,
+    .tv-big .tv-led {
+      background: #ff5a3c;
+      box-shadow: 0 0 .6em #ff5a3c;
+    }
+
+    .tv-feet {
+      display: block;
+      position: relative;
+      height: .9em;
+    }
+
+    .tv-feet::before,
+    .tv-feet::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 3em;
+      height: .9em;
+      background: #2d2118;
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+    }
+
+    .tv-feet::before { left: 2.5em; }
+    .tv-feet::after { right: 2.5em; }
+
+    .tv-note {
+      display: block;
+      margin-top: 8px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      line-height: 1.1;
+      color: var(--ink-soft);
+    }
+
+    /* Big TV in the player overlay */
+    .tv-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      overflow: auto;
+      background: rgba(18, 24, 40, .84);
+    }
+
+    .tv-overlay[hidden] { display: none; }
+
+    html.tv-lock,
+    html.tv-lock body { overflow: hidden; }
+
+    .tv-stage {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .tv-big {
+      --w: min(96vw, 760px, calc((100vh - 130px) * .82));
+      --w: min(96vw, 760px, calc((100dvh - 130px) * .82));
+      cursor: default;
+      rotate: none;
+    }
+
+    .tv-big:hover { transform: none; }
+
+    .tv-big .tv-screen.crt { animation: crt-on .45s ease-out; }
+
+    @keyframes crt-on {
+      0% { transform: scale(.6, .008); filter: brightness(5); }
+      45% { transform: scale(1, .008); filter: brightness(3); }
+      100% { transform: none; filter: none; }
+    }
+
+    .tv-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .tv-btn {
+      font-family: 'Kalam', cursive;
+      font-size: 17px;
+      padding: 6px 16px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink-soft);
+      border-radius: 6px 10px 7px 11px;
+      box-shadow: 2px 3px 0 rgba(0, 0, 0, .3);
+      cursor: pointer;
+    }
+
+    .tv-btn:hover { background: var(--highlight); }
+    .tv-btn:focus-visible { outline: 3px solid var(--highlight-pink); outline-offset: 3px; }
+    .tv-btn.off { color: var(--red-pen); }
+
+    .tv-title {
+      min-width: 12ch;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: #fff;
+    }
+
+    /* Wide screens: TVs hang in the page margins */
+    @media (min-width: 1400px) {
+      .tv-wall {
+        --tv-w: clamp(110px, calc((100vw - 1120px) / 2 - 28px), 230px);
+        display: contents;
+      }
+
+      .tv-heading { display: none; }
+
+      .tv-wall > .tv {
+        position: absolute;
+        z-index: 2;
+      }
+
+      .tv-1 { top: 10%; left: calc(44px - var(--tv-w)); --r: -3deg; }
+      .tv-2 { top: 28%; right: calc(44px - var(--tv-w)); --r: 2.5deg; }
+      .tv-3 { top: 52%; left: calc(44px - var(--tv-w)); --r: -2deg; }
+      .tv-4 { top: 77%; right: calc(44px - var(--tv-w)); --r: 3deg; }
+    }
+
+    @media (max-width: 560px) {
+      .tv-wall { --tv-w: clamp(130px, 38vw, 190px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tv-static, .tv-big .tv-screen.crt { animation: none; }
+      .tv, .tv-knob { transition: none; }
+    }
   </style>
 </head>
 
@@ -1018,6 +1375,10 @@
     </section>
 
     <div class="divider">// // //</div>
+
+    <section class="tv-wall" id="tvWall">
+      <h3 class="tv-heading">// tune in //</h3>
+    </section>
 
     <section class="info-grid">
       <div class="info-block">
@@ -1390,6 +1751,126 @@
       });
       polaroid.addEventListener('mouseleave', () => { polaroid.style.transform = 'rotate(3deg)'; });
     }
+
+    // ============ RETRO TVs ============
+    // Swap in your own videos here — each entry is one TV. `poster` is optional.
+    const TV_CHANNELS = [
+      { title: 'Gully Labs', src: 'https://video.wixstatic.com/video/1251ea_8137721d55724aa28967926b4357d212/1080p/mp4/file.mp4', poster: 'https://static.wixstatic.com/media/1251ea_8137721d55724aa28967926b4357d212f000.jpg' },
+      { title: 'Cute Labs', src: 'https://video.wixstatic.com/video/1251ea_c55bc3b205344290a9b9236af7dae1e5/1080p/mp4/file.mp4', poster: 'https://static.wixstatic.com/media/1251ea_c55bc3b205344290a9b9236af7dae1e5f000.jpg' },
+      { title: 'Hibiscus Monkey: body wash', src: 'https://video.wixstatic.com/video/1251ea_109aa33cab8449feb301f8a9f18de5f6/1080p/mp4/file.mp4' },
+      { title: 'Hibiscus Monkey: the oil', src: 'https://video.wixstatic.com/video/1251ea_3b0ce56277014ed394e8cb0d33370c87/1080p/mp4/file.mp4' }
+    ];
+
+    (function () {
+      const wall = document.getElementById('tvWall');
+      if (!wall) return;
+
+      const tvParts = (big) =>
+        '<span class="tv-ears" aria-hidden="true"></span>' +
+        '<span class="tv-body"><span class="tv-screen">' +
+        (big ? '<video class="tv-video" controls playsinline></video>' : '') +
+        '<span class="tv-static"></span>' +
+        (big ? '' : '<span class="tv-hint">tune in</span>') +
+        '<span class="tv-glass"></span></span>' +
+        '<span class="tv-panel" aria-hidden="true"><span class="tv-knob k1"></span><span class="tv-knob k2"></span>' +
+        '<span class="tv-grille"></span><span class="tv-led"></span></span></span>' +
+        '<span class="tv-feet" aria-hidden="true"></span>';
+
+      TV_CHANNELS.forEach((c, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tv tv-' + (i + 1);
+        b.setAttribute('aria-label', 'Watch ' + c.title + ' on channel ' + (i + 1));
+        b.innerHTML = tvParts(false) + '<span class="tv-note">' + c.title + '</span>';
+        b.addEventListener('click', () => openTV(i, b));
+        wall.appendChild(b);
+      });
+
+      const overlay = document.createElement('div');
+      overlay.className = 'tv-overlay';
+      overlay.hidden = true;
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', 'TV player');
+      overlay.innerHTML =
+        '<div class="tv-stage"><div class="tv tv-big">' + tvParts(true) + '</div>' +
+        '<div class="tv-controls">' +
+        '<button type="button" class="tv-btn" data-act="prev" aria-label="Previous channel">&#9664; prev</button>' +
+        '<span class="tv-title" aria-live="polite"></span>' +
+        '<button type="button" class="tv-btn" data-act="next" aria-label="Next channel">next &#9654;</button>' +
+        '<button type="button" class="tv-btn off" data-act="close">turn off</button></div></div>';
+      document.body.appendChild(overlay);
+
+      const screen = overlay.querySelector('.tv-screen');
+      const video = overlay.querySelector('video');
+      const title = overlay.querySelector('.tv-title');
+      const knobs = overlay.querySelectorAll('.tv-knob');
+      let current = 0, opener = null, turns = 0;
+
+      function tune(i) {
+        current = (i + TV_CHANNELS.length) % TV_CHANNELS.length;
+        const c = TV_CHANNELS[current];
+        screen.classList.remove('is-on', 'crt');
+        void screen.offsetWidth; // restart the CRT warm-up animation
+        screen.classList.add('crt');
+        title.textContent = 'ch. ' + (current + 1) + ' · ' + c.title;
+        video.poster = c.poster || '';
+        video.src = c.src;
+        video.play().catch(() => {});
+        turns += 1;
+        knobs[0].style.transform = 'rotate(' + turns * 50 + 'deg)';
+        knobs[1].style.transform = 'rotate(' + turns * -35 + 'deg)';
+      }
+
+      function openTV(i, from) {
+        opener = from;
+        overlay.hidden = false;
+        document.documentElement.classList.add('tv-lock');
+        tune(i);
+        overlay.querySelector('[data-act="close"]').focus();
+      }
+
+      function closeTV() {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+        overlay.hidden = true;
+        document.documentElement.classList.remove('tv-lock');
+        if (opener) opener.focus();
+      }
+
+      video.addEventListener('playing', () => screen.classList.add('is-on'));
+      video.addEventListener('error', () => {
+        screen.classList.remove('is-on');
+        title.textContent = 'no signal · check this video link';
+      });
+
+      overlay.addEventListener('click', (e) => {
+        const act = e.target.closest('[data-act]');
+        if (act) {
+          const a = act.dataset.act;
+          if (a === 'prev') tune(current - 1);
+          else if (a === 'next') tune(current + 1);
+          else closeTV();
+        } else if (e.target === overlay) {
+          closeTV();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (overlay.hidden) return;
+        if (e.key === 'Escape') { closeTV(); return; }
+        if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && e.target !== video) {
+          tune(current + (e.key === 'ArrowRight' ? 1 : -1));
+        }
+        if (e.key === 'Tab') {
+          const f = [video, ...overlay.querySelectorAll('.tv-btn')];
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+    })();
   </script>
 </body>
 
